@@ -37,8 +37,7 @@ A feature-rich Jira clone built with **Next.js 14.2**, designed to simplify issu
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/jira-clone.git
-  ```
-2. **Use Yarn **:
-   ```base
-     yarn
-   ``` 
+
+2. **Yarn command**:
+    ```bash
+      yarn
