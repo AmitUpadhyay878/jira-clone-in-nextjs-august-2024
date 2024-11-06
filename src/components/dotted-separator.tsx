@@ -11,7 +11,7 @@ interface DottedSepatatorprops {
 
 export const DottedSepatator = ({
     className,
-    color = `#8d8d91`,
+    color = `#d4d4d8`,
     height="2px",
     dotSize="5px",
     gapSize="6px",
