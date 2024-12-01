@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   // experimental:{
   //   ppr:true
   // }
-  }
+  // output:"export",
+  // compress: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
 
 export default nextConfig;

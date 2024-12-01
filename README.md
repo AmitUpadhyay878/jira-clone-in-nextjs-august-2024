@@ -11,6 +11,7 @@ pnpm dev
 # or
 bun dev
 ```
+
 # Jira Clone
 
 A feature-rich Jira clone built with **Next.js 14.2**, designed to simplify issue tracking, task management, and team collaboration. This project replicates essential Jira functionalities, making it perfect for developers and teams who want to manage tasks and workflows efficiently.
@@ -35,9 +36,13 @@ A feature-rich Jira clone built with **Next.js 14.2**, designed to simplify issu
 ## 🚀 Getting Started
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/your-username/jira-clone.git
 
+   ```
+
 2. **Yarn command**:
-    ```bash
-      yarn
+   ```bash
+     yarn
+   ```
