@@ -1,20 +1,6 @@
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
 # Jira Clone
 
-A feature-rich Jira clone built with **Next.js 14.2**, designed to simplify issue tracking, task management, and team collaboration. This project replicates essential Jira functionalities, making it perfect for developers and teams who want to manage tasks and workflows efficiently.
+A feature-rich Jira clone built with **Next.js 15.0.1**, designed to simplify issue tracking, task management, and team collaboration. This project replicates essential Jira functionalities, making it perfect for developers and teams who want to manage tasks and workflows efficiently.
 
 ## 🌟 Features
 
@@ -26,23 +12,9 @@ A feature-rich Jira clone built with **Next.js 14.2**, designed to simplify issu
 
 ## 💻 Tech Stack
 
-- **Next.js 14.2** for server-rendered and static web application framework
+- **Next.js 15.0.1** for server-rendered and static web application framework
 - **React** for building reusable and interactive UI components
 - **TypeScript** for robust, type-safe code
 - **Tailwind CSS** for fast, responsive, and customizable styling
-- **Prisma** as the ORM and **PostgreSQL** for data management
-- **Auth.js** for secure user authentication
+- **AppWrite** for data management
 
-## 🚀 Getting Started
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/your-username/jira-clone.git
-
-   ```
-
-2. **Yarn command**:
-   ```bash
-     yarn
-   ```

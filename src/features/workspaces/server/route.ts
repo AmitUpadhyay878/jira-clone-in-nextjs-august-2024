@@ -146,5 +146,30 @@ async(c)=>{
       return c.json({data:workspace})
 }
 )
+.delete("/:workspaceId",sessionMiddleware,async(c)=>{
+
+  const {workspaceId} = c.req.param()
+
+  const databases = c.get("databases");
+  const storage = c.get('storage');
+  const user = c.get("user");
+  const member = await getMember({
+    databases,
+    workspaceId,
+    userId:user?.$id,
+  })
+
+  if(!member || member.roll !== MemberRole.ADMIN){
+    return c.json({ error:"UnAuthorized"},401);
+  }
+
+  await databases.deleteDocument(
+    DATABASE_ID,
+    WORKSPACES_ID,
+    workspaceId
+  )
+
+  return c.json({data:{$id:workspaceId}})
+})
 
 export default app;
