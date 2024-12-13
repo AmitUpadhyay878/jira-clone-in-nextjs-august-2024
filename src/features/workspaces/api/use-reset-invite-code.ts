@@ -3,30 +3,30 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { client } from "@/lib/rpc";
 
-type ResponseType = InferResponseType<typeof client.api.workspaces[":workspaceId"]["$delete"],200>;
-type RequestType = InferRequestType<typeof client.api.workspaces[":workspaceId"]["$delete"]>;
+type ResponseType = InferResponseType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"],200>;
+type RequestType = InferRequestType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"]>;
 
-export const useDeleteWorkspace = () => {
+export const useResetInviteCode = () => {
   const queryClient = useQueryClient();
   const multation = useMutation<ResponseType, Error, RequestType>({
     
     mutationFn: async ({ param }) => {
 
-      const response = await client.api.workspaces[":workspaceId"]["$delete"]({ param });
+      const response = await client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"]({ param });
       
       if(!response.ok){
-        throw new Error("Fail to Delete a new workspace")
+        throw new Error("Fail to reset invite code")
       }
       return await response.json();
     },
 
     onSuccess: ({data}) => {
-      toast.success("Workspace Deleted successfully")
+      toast.success("Invite code reset")
       queryClient.invalidateQueries({ queryKey: ["workspaces"] });
       queryClient.invalidateQueries({ queryKey: ["workspace",data?.$id] });
     },
     onError:()=>{
-        toast.error("Fail to Delete a workspace")
+        toast.error("Fail to reset invite code")
     }
   });
 
