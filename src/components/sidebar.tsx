@@ -4,6 +4,7 @@ import React from "react";
 import { DottedSepatator } from "./dotted-separator";
 import { Navigation } from "./navigation";
 import { WorkspaceSwitcher } from "./workspace-switcher";
+import {Projects} from "./projects";
 
 const Sidebar = () => {
   return (
@@ -21,6 +22,8 @@ const Sidebar = () => {
       <WorkspaceSwitcher />
       <DottedSepatator className="my-4" />
       <Navigation />
+      <DottedSepatator className="my-4" />
+      <Projects />
     </aside>
   );
 };
