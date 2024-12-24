@@ -89,13 +89,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
 
     resetInviteCode({
       param:{workspaceId:initialValues?.$id},
-    },
-    {
-      onSuccess:()=>{
-          router.refresh()
-      }
-    }
-  )
+    })
   }
 
   const onSubmit = (values: z.infer<typeof updateWorkSpaceSchema>) => {
@@ -112,9 +106,8 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
       param:{workspaceId:initialValues?.$id}
      },
         {
-            onSuccess:({data})=>{
+            onSuccess:()=>{
                 form.reset()
-                router.push(`/workspaces/${data?.$id}`)
             },
             onError:()=>{
                 toast.error("Somthing went wrong to create a workspace")
@@ -275,7 +268,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
         <div className="flex flex-col">
             <h3 className="font-bold">Invite Members</h3>
             <p className="text-sm text-muted-foreground">
-              Usethe invite link to add members to your workspace.
+              Use the invite link to add members to your workspace.
             </p>
             <div className="mt-4">
               <div className="flex items-center gap-x-2">

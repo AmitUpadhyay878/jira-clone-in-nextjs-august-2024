@@ -25,9 +25,9 @@ const WorkspaceIdSettingsPage = async ({ params }: WorkspaceIdSettingsPageProps)
     redirect('/sign-in');
   }
 
-  if (!initialValues) {
-    redirect(`/workspaces/${resolvedParams?.workspaceId}`);
-  }
+  // if (!initialValues) {
+  //   redirect(`/workspaces/${resolvedParams?.workspaceId}`);
+  // }
 
   return (
     <div className="w-full lg:max-w-xl">
