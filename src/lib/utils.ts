@@ -13,7 +13,10 @@ export function generateInviteCode(length:number){
   for(let i=0; i<length; i++){
     result +=characters.charAt(Math.floor(Math.random()*characters.length))
   }
-
   return result
 }
 //#endregion
+
+export function snakeCasetoTitleCase(str:string){
+  return str.toLowerCase().replace(/_/g," ").replace(/\b\w/g,(char)=>char.toUpperCase())
+}

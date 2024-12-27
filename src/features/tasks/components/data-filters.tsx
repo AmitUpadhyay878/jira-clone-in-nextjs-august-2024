@@ -16,7 +16,6 @@ import {FolderIcon, ListChecksIcon, UserIcon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { taskStatus } from '../types';
 import { useTaskFilters } from '../hooks/use-task-filters';
-
 interface DataFiltersProps {
 hideProjectFilter?:boolean;
 }
@@ -33,12 +32,12 @@ const DataFilters = ({hideProjectFilter}:DataFiltersProps) => {
         value:project?.$id,
         label:project?.name
     })
-)
-const memberOptions = members?.documents.map((member:any) => ({
+    )
+    const memberOptions = members?.documents.map((member:any) => ({
     value:member?.$id,
     label:member?.name    
 })
-)
+    )
 
 const[{
     status,
@@ -58,8 +57,6 @@ const onAssigneeChange = (value:string) => {
         setFilters({projectId: value==="all" ? null :value as string})
         }    
         
-
-
         if(isLoading) return null
 
   return (
