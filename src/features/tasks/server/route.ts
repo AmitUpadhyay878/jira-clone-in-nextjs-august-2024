@@ -170,6 +170,45 @@ const app = new Hono()
 
         return c.json({data: task})
 })
+.patch('/:taskId',
+    sessionMiddleware,
+    zValidator("json",createTaskSchema.partial()),
+    async (c) => {
+        const user  = c.get("user")
+        const databases  = c.get("databases")
+
+        const {taskId} = c.req.param()
+
+        const{name,status, workspaceId, projectId, dueDate, assigneeId, description} = c.req.valid("json")
+
+        const existingTasks= await databases.getDocument<Task>(
+            DATABASE_ID,
+            TASKS_ID,
+            taskId
+        )
+
+        const member = await getMember({databases, workspaceId:existingTasks?.workspaceId, userId:user.$id})
+
+        if(!member){
+            return c.json({error:"UnAuthorized"}, 401)
+        }
+
+        const task = await databases.updateDocument<Task>(
+            DATABASE_ID,
+            TASKS_ID,
+            taskId,
+            {
+                name,
+                status,
+                projectId,
+                assigneeId,
+                dueDate,
+                description
+            }
+        )
+
+        return c.json({data: task})
+})
 .delete("/:taskId",
     sessionMiddleware,
     async(c)=>{
@@ -178,7 +217,6 @@ const app = new Hono()
 
         const {taskId} = c.req.param()
 
-        
         const task = await databases.getDocument<Task>(
             DATABASE_ID,
             TASKS_ID,
@@ -191,7 +229,7 @@ const app = new Hono()
         })
         
         if(!member){
-            return c.json({error:"UnAuthorize"},401)
+            return c.json({error:"UnAuthorized"},401)
         }
 
         await databases.deleteDocument(
@@ -202,6 +240,117 @@ const app = new Hono()
 
         return c.json({data:{$id:task?.$id}})
     }
+)
+.get("/:taskId",
+    sessionMiddleware,
+    async(c)=>{
+        const currentUser = c.get("user")
+        const databases = c.get("databases")
+        const { users} = await createAdminClient() 
+        const {taskId} = c.req.param()
+
+        const task = await databases.getDocument<Task>(
+            DATABASE_ID,
+            TASKS_ID,
+            taskId
+        )
+
+        const currentMember = await getMember({
+            databases,
+            workspaceId:task?.workspaceId,
+            userId:currentUser.$id
+        })
+
+        if(!currentMember){
+            return c.json({error:"UnAuthorized"},401)
+        }
+
+        const project = await databases.getDocument<Task>(
+            DATABASE_ID,
+            PROJECTS_ID,
+            task?.projectId
+        )
+
+        const member = await databases.getDocument(
+            DATABASE_ID,
+            MEMBERS_ID,
+            task.assigneeId
+        )
+
+        const user = await users.get(member.userId)
+
+        const assignee = {
+            ...member,
+            name:user?.name,
+            email:user?.email,
+        }
+
+        return c.json({
+            data:{
+                ...task,
+                project,
+                assignee
+            }
+        })
+    }
+)
+.post("/bulk-update",
+        sessionMiddleware,
+        zValidator("json",z.object({
+            tasks:z.array(
+                z.object({
+                    $id:z.string(),
+                    status:z.nativeEnum(taskStatus),
+                    position:z.number().int().positive().min(1000).max(1_000_000)
+                })
+            )
+        })),
+        async(c)=>{
+            const databases = c.get("databases")
+            const{tasks} = await c.req.valid("json")
+            const user = c.get("user")
+
+            const tasksToUpdate = await databases.listDocuments<Task>(
+                DATABASE_ID,
+                TASKS_ID,
+                [Query.contains("$id",tasks.map((task)=>task.$id))]
+            )
+
+            const workspaceIds = new Set(tasksToUpdate.documents.map(task=>task.workspaceId))
+
+            if(workspaceIds.size !==1){
+                return c.json({error: "All tasks belong to the same workspace"})
+            }
+
+            const workspaceId =workspaceIds.values().next().value || "";
+
+            const member = await getMember({
+                databases,
+                workspaceId,
+                userId:user.$id
+            })
+
+            if(!member){
+                return c.json({error:"UnAuthorized"},401)
+            }
+
+            const results = await Promise.allSettled(
+                tasks.map(async (task) => {
+                    const { $id, status, position } = task;
+                    return databases.updateDocument<Task>(
+                        DATABASE_ID,
+                        TASKS_ID,
+                        $id,
+                        { status, position }
+                    );
+                })
+            );
+            
+            const updatedTasks = results.filter((res) => res.status === "fulfilled").map((res) => (res as PromiseFulfilledResult<any>).value);
+            const failedTasks = results.filter((res) => res.status === "rejected").map((res) => (res as PromiseRejectedResult).reason);
+            
+            return c.json({ data:updatedTasks, failedTasks });
+        }
 )
 
 export default app;

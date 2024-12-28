@@ -27,7 +27,7 @@ export const Projects = () => {
             const href = `/workspaces/${workspaceId}/projects/${project?.$id}`
             const isActive = pathname === href
             return (
-              <Link href={href} key={project?.$id}>
+              <Link href={href} key={project?.$id} title={project?.name}>
                 <div
                   className={cn("flex items-center gap-2.5 p-2 rounded-md hover:opacity-75 translate cursor-pointer text-neutral-500", isActive && "bg-white shadow-sm hover:opacity-100 text-primary")}
                 >

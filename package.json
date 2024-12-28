@@ -14,6 +14,7 @@
     "node": ">=20.13.1"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^17.0.0",
     "@hono/zod-validator": "^0.4.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -42,6 +43,7 @@
     "node-appwrite": "^14.1.0",
     "nuqs": "1.19.1",
     "react": "19.0.0-rc-69d4b800-20241021",
+    "react-big-calendar": "^1.17.1",
     "react-day-picker": "8.10.1",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-hook-form": "^7.53.1",
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-big-calendar": "^1.16.0",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.0.1",

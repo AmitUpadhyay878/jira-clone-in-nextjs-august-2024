@@ -16,7 +16,6 @@ export const useGetMembers = ({ workspaceId }: useGetMembersProps) => {
             }
 
             const { data } = await response.json();
-            console.log('Fetched Data:', data); // Debugging log
             return data;
         },
     });

@@ -19,7 +19,7 @@ const badgeVariants = cva(
         [taskStatus?.TODO]:"border-transparent bg-red-400 text-primary hover:bg-red-400/80",
         [taskStatus?.IN_PROGRESS]:"border-transparent bg-yellow-400 text-primary hover:bg-yellow-400/80",
         [taskStatus?.BACKLOG]:"border-transparent bg-blue-400 text-primary hover:bg-blue-400/80",
-        [taskStatus?.DONE]:"border-transparent bg-emerand-400 text-primary hover:bg-emerand-400/80",
+        [taskStatus?.DONE]:"border-transparent bg-green-400 text-primary hover:bg-green-400/80",
         [taskStatus?.IN_REVIEW]:"border-transparent bg-pink-400 text-primary hover:bg-pink-400/80",
       },
     },

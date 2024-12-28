@@ -42,7 +42,6 @@ export const columns :ColumnDef<Task>[] = [
         },
         cell:({row})=>{
             const project = row.original.project;
-            console.log(project,"project")
           return(
             <div className='flex items-center gap-x-2 text-sm font-medium '>
                 <ProjectAvatar
@@ -123,6 +122,9 @@ export const columns :ColumnDef<Task>[] = [
         }
     },
     {
+      header:()=>{
+        return(<span>Action</span>)
+      },
       id:"actions",
       cell:({row})=>{
         const id= row?.original?.$id;
@@ -130,8 +132,8 @@ export const columns :ColumnDef<Task>[] = [
 
         return(
           <TaskActions id={id} projectId={projectId}>
-              <Button variant="ghost" className='size-8 p-0' asChild onClick={()=>{}}>
-                  <MoreVerticalIcon className='size-4'/>
+              <Button variant="ghost" className='size-6 p-0 mr-2' asChild onClick={()=>{}}>
+                  <MoreVerticalIcon className='size-2'/>
               </Button>
           </TaskActions>
         )

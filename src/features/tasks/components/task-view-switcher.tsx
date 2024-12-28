@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Loader, PlusIcon } from 'lucide-react'
 import {useQueryState} from 'nuqs'
 import {useGetTasks} from '../api/use-get-tasks'
@@ -12,6 +12,10 @@ import DataFilters from './data-filters'
 import { useTaskFilters } from '../hooks/use-task-filters'
 import { DataTable } from './data-table'
 import {columns} from './columns'
+import { Datakanban } from './data-kanban'
+import { taskStatus } from '../types'
+import { useBulkUpdateTasks } from '../api/use-bulk-update-tasks'
+import { DataCalendar } from './data-calendar'
 
 export const TaskViewSwitcher = () => {
 
@@ -22,6 +26,8 @@ export const TaskViewSwitcher = () => {
         dueDate,
     }] = useTaskFilters()
 
+
+    const {mutate:bulkUpdate} = useBulkUpdateTasks()
 
 
     const [view, setView] = useQueryState("task-view",{
@@ -40,6 +46,15 @@ export const TaskViewSwitcher = () => {
     })
 
     const {open} = useCreateTaskModal()
+
+    const onkanbanChange = useCallback((
+        tasks:{$id:string;status:taskStatus,postion:number}[]
+    )=>{
+        console.log({tasks})
+        bulkUpdate({
+            json:{tasks}
+        })
+    },[bulkUpdate,tasks])
 
 
   return (
@@ -63,7 +78,7 @@ export const TaskViewSwitcher = () => {
                 </TabsList>
                 <Button onClick={open} className='w-full lg:w-auto' size={'sm'} variant={'primary'}>
                     <PlusIcon  className='size-4 mr-2'/>
-                    New 
+                    Add Task 
                 </Button>
             </div>
             <DottedSepatator className='my-3' />
@@ -81,10 +96,10 @@ export const TaskViewSwitcher = () => {
                    <DataTable columns={columns} data={tasks.documents ?? []} />
             </TabsContent>
             <TabsContent value='kanban' className='mt-0'>
-            {JSON.stringify(tasks)}
+                <Datakanban onChange={onkanbanChange} data={tasks.documents ?? []} />
             </TabsContent>
-            <TabsContent value='calendar' className='mt-0'>
-            {JSON.stringify(tasks)}
+            <TabsContent value='calendar' className='mt-0 h-full pb-4'>
+                    <DataCalendar data={tasks.documents ?? []} />
             </TabsContent>
             </>
                 )
@@ -93,4 +108,3 @@ export const TaskViewSwitcher = () => {
     </Tabs>
   )
 }
-

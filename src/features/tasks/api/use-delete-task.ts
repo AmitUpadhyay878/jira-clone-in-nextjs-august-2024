@@ -4,8 +4,8 @@ import { InferRequestType, InferResponseType } from "hono";
 import {toast} from 'sonner'
 import { client } from "@/lib/rpc";
 
-type ResponseType = InferResponseType<(typeof client.api.tasks)[":taskId"]["$delete"],400>;
-type RequestType = InferRequestType<(typeof client.api.tasks)[":taskId"]["$delete"]>;
+type ResponseType = InferResponseType<typeof client.api.tasks[":taskId"]["$delete"],200>;
+type RequestType = InferRequestType<typeof client.api.tasks[":taskId"]["$delete"]>;
 
 export const useDeleteTask= () => {
 
@@ -13,7 +13,7 @@ export const useDeleteTask= () => {
   const queryClient = useQueryClient();
   const multation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param }) => {
-      const response = await client.api.tasks["$delete"][":taskId"]({ param });
+      const response = await client.api.tasks[":taskId"]["$delete"]({ param });
       if(!response.ok){
         throw new Error("Fail to delete a new task")
       }
@@ -24,10 +24,10 @@ export const useDeleteTask= () => {
         toast.success("Task deleted successfully")
         router.refresh()
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      queryClient.invalidateQueries({ queryKey: ["tasks",data?.$id] });
+      queryClient.invalidateQueries({ queryKey: ["task",data?.$id] });
     },
-    onError:()=>{
-        toast.error("Fail to delete a task")
+    onError:(error)=>{
+      toast.error(error.message || "Failed to delete task");
     }
   });
 
