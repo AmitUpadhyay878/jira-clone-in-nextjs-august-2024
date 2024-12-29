@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetMembers } from "@/features/members/api/use-get-members";
-import { useGetProject } from "@/features/projects/api/use-get-projects";
+import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Loader } from "lucide-react";
 import { CreateTakForm } from "./create-task-form";
@@ -11,7 +11,7 @@ interface createTaskformWrapperProps {
 
 export const CreateTaskFormWrapper = ({ onCancel }: createTaskformWrapperProps) => {
     const workspaceId = useWorkspaceId()
-    const { data:projects, isLoading:isLoadingProjects} = useGetProject({ workspaceId })
+    const { data:projects, isLoading:isLoadingProjects} = useGetProjects({ workspaceId })
     const { data:members, isLoading:isLoadingMembers} = useGetMembers({ workspaceId })
     
     const projectOptions = projects?.documents.map((project:any) => ({

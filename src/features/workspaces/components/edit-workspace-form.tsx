@@ -104,15 +104,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     mutate({ 
       form: finalValues,
       param:{workspaceId:initialValues?.$id}
-     },
-        {
-            onSuccess:()=>{
-                form.reset()
-            },
-            onError:()=>{
-                toast.error("Somthing went wrong to create a workspace")
-            }
-        }
+     }
     );
   };
 

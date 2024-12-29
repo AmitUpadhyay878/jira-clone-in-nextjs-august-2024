@@ -161,7 +161,7 @@ export const Datakanban =({data,onChange}:DatakanbanProps)=>{
 
     return (
         <DragDropContext onDragEnd={onDragEnd} >
-            <div className='flex overflow-x-auto'>
+            <div className='flex overflow-x-hidden'>
                 {boards?.map((board)=>{
                     return(
                         <div key={board} className='flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]'>

@@ -17,7 +17,12 @@ import { taskStatus } from '../types'
 import { useBulkUpdateTasks } from '../api/use-bulk-update-tasks'
 import { DataCalendar } from './data-calendar'
 
-export const TaskViewSwitcher = () => {
+
+interface TaskViewSwitcherPorps{
+    hideProjectFilter?:boolean
+}
+
+export const TaskViewSwitcher = ({hideProjectFilter}:TaskViewSwitcherPorps) => {
 
     const[{
         status,
@@ -82,7 +87,7 @@ export const TaskViewSwitcher = () => {
                 </Button>
             </div>
             <DottedSepatator className='my-3' />
-                <DataFilters />
+                <DataFilters hideProjectFilter={hideProjectFilter} />
             <DottedSepatator className='my-3' />
             {
                 isTaskLoading ?(

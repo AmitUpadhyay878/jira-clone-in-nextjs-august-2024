@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useGetMembers } from '@/features/members/api/use-get-members';
-import { useGetProject } from '@/features/projects/api/use-get-projects';
+import { useGetProjects } from '@/features/projects/api/use-get-projects';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id';
 import {
     Select,
@@ -23,7 +23,7 @@ hideProjectFilter?:boolean;
 const DataFilters = ({hideProjectFilter}:DataFiltersProps) => {
 
     const workspaceId = useWorkspaceId()
-    const{data:projects,isLoading:isWorkspaceLoading} = useGetProject({workspaceId})
+    const{data:projects,isLoading:isWorkspaceLoading} = useGetProjects({workspaceId})
     const{data:members,isLoading:isMemberLoading} = useGetMembers({workspaceId})
 
     const isLoading = isWorkspaceLoading || isMemberLoading;
@@ -121,6 +121,7 @@ const onAssigneeChange = (value:string) => {
         </Select>
 
          {/* Project ID */}
+         {!hideProjectFilter && (
          <Select 
         defaultValue={projectId ?? undefined}
         onValueChange={(value)=>onProjectChange(value)} 
@@ -143,6 +144,7 @@ const onAssigneeChange = (value:string) => {
                 ))}
             </SelectContent>
         </Select>
+         )}
         
         {/* Due Date */}
         <DatePicker 

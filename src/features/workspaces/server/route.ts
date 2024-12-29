@@ -1,17 +1,18 @@
 import { Hono } from "hono";
+import { z } from "zod";
 import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
+import { generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
+import { Workspace } from "../types";
 import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 import { createWorkSpaceSchema, updateWorkSpaceSchema } from "../schemas";
 import { MemberRole } from "@/features/members/types";
-import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/features/members/utils";
-import { z } from "zod";
-import { Workspace } from "../types";
 
 const app = new Hono()
-.get("/",sessionMiddleware, async(c)=>{
+.get(
+  "/",sessionMiddleware, async(c)=>{
     const databases = c.get("databases")
     const user = c.get("user");
     
@@ -41,6 +42,49 @@ const app = new Hono()
 
     return c.json({data:workspaces})
 }) 
+.get(
+  "/:workspaceId",sessionMiddleware,async(c)=>{
+  const databases = c.get("databases")
+  const user = c.get("user");
+  const {workspaceId} = c.req.param()
+
+  const member = getMember({
+      databases,
+      workspaceId,
+      userId:user?.$id
+    })
+
+      if(!member){
+        return c.json({error:"UnAuthorized"},401)
+      }
+
+      const workspace = await databases.getDocument<Workspace>(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+      )
+
+      return c.json({data:workspace})
+})
+.get(
+  "/:workspaceId/info",sessionMiddleware,async(c)=>{
+  const databases = c.get("databases")
+  const user = c.get("user");
+  const {workspaceId} = c.req.param()
+
+      const workspace = await databases.getDocument<Workspace>(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+      )
+
+      return c.json({
+        data:{
+          $id:workspace?.$id,
+          ame:workspace?.name,
+          mageUrl:workspace?.imageUrl
+        }})
+})
 .post(
   "/",
   zValidator("form", createWorkSpaceSchema),
@@ -148,7 +192,8 @@ async(c)=>{
       return c.json({data:workspace})
 }
 )
-.delete("/:workspaceId",sessionMiddleware,async(c)=>{
+.delete(
+  "/:workspaceId",sessionMiddleware,async(c)=>{
 
   const {workspaceId} = c.req.param()
 
@@ -176,8 +221,8 @@ async(c)=>{
 
   return c.json({data:{$id:workspaceId}})
 })
-
-.post("/:workspaceId/reset-invite-code",sessionMiddleware,async(c)=>{
+.post(
+  "/:workspaceId/reset-invite-code",sessionMiddleware,async(c)=>{
 
   const {workspaceId} = c.req.param()
 
@@ -205,8 +250,8 @@ async(c)=>{
 
   return c.json({data:workspace})
 })
-
-.post("/:workspaceId/join",sessionMiddleware,zValidator("json",z.object({
+.post(
+  "/:workspaceId/join",sessionMiddleware,zValidator("json",z.object({
   code:z.string()
 })),async(c)=>{
   const {workspaceId} = c.req.param()
