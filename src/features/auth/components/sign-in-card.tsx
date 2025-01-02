@@ -41,7 +41,7 @@ export const SigninCard = () => {
         <CardTitle className="text-2xl">Well come Back!</CardTitle>
       </CardHeader>
       <DottedSepatator />
-      <CardContent className="p-7">
+      <CardContent className="p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -81,11 +81,11 @@ export const SigninCard = () => {
             </Button>
           </form>
         </Form>
-        <div className="p-7">
+        <div className="pt-7">
           <DottedSepatator />
         </div>
       </CardContent>
-      <CardContent className="p-7 flex flex-col gap-y-4">
+      <CardContent className="pt-4 flex flex-col gap-y-2">
         <Button className="w-full" variant="secondary" disabled={isPending}>
           <FcGoogle className="mr-2 size-5" />
           login with Google

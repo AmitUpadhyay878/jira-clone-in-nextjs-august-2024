@@ -31,7 +31,7 @@ export const Projects = () => {
               className="flex items-center gap-2.5 p-1 rounded-md animate-pulse mb-2"
             >
               <div className="w-8 h-8 rounded-full bg-gray-300" />
-              <div className="h-4 w-24 bg-gray-300 rounded-md truncate" />
+              <div className="h-4 w-48 bg-gray-300 rounded-md truncate" />
             </div>
           ))}
         </div>

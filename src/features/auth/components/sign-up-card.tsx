@@ -47,7 +47,7 @@ export const SignUpCard = () => {
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">Sign Up</CardTitle>
-        <CardDescription>
+        <CardDescription className="text-xs pt-2">
           By Signing up, you agree to our{" "}
           <Link href="/privacy">
             <span className="text-blue-700">Privacy-policy</span>
@@ -60,7 +60,7 @@ export const SignUpCard = () => {
       </CardHeader>
 
       <DottedSepatator />
-      <CardContent className="p-7">
+      <CardContent className="p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -118,11 +118,11 @@ export const SignUpCard = () => {
             </Button>
           </form>
         </Form>
-        <div className="p-7">
+        <div className="pt-7">
           <DottedSepatator />
         </div>
       </CardContent>
-      <CardContent className="p-7 flex flex-col gap-y-4">
+      <CardContent className="pt-4 flex flex-col gap-y-2">
         <Button className="w-full" variant="secondary" disabled={isPending}>
           <FcGoogle className="mr-2 size-5" />
           login with Google

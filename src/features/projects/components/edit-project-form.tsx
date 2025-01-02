@@ -3,8 +3,7 @@ import React,{useRef} from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
@@ -239,7 +238,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
             size={"sm"} 
             variant="destructive"
             type="button"
-            disabled={isPending}
+            disabled={isPending || isDeleteingProject}
             onClick={handleDelete}
             >
               Delete Project

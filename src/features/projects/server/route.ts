@@ -35,7 +35,7 @@ const app = new Hono()
         return c.json({error:"Missing workspace"},401)
     }
 
-    const projects = await databases.listDocuments(
+    const projects = await databases.listDocuments<Project>(
         DATABASE_ID,
         PROJECTS_ID,
         [
@@ -385,7 +385,6 @@ async(c)=>{
           overdueTaskDiffrence
         }
       })
-
 })
 
 export default app;

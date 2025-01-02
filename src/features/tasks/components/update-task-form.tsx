@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +24,6 @@ import { DottedSepatator } from "@/components/dotted-separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/date-picker";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { createTaskSchema } from "../schemas";
@@ -43,9 +41,7 @@ interface EditTaskFormProps {
 
 export const EditTaskForm = ({ onCancel,projectOptions,memberOptions,initialValues }: EditTaskFormProps) => {
 
-  const workspaceId = useWorkspaceId()
   const { mutate, isPending } = useUpdateTask();
-  const router = useRouter()
 
 
   const form = useForm<z.infer<typeof createTaskSchema>>({

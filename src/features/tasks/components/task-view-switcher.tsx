@@ -16,6 +16,7 @@ import { Datakanban } from './data-kanban'
 import { taskStatus } from '../types'
 import { useBulkUpdateTasks } from '../api/use-bulk-update-tasks'
 import { DataCalendar } from './data-calendar'
+import { useProjectId } from '@/features/projects/hooks/use-project-id'
 
 
 interface TaskViewSwitcherPorps{
@@ -41,12 +42,14 @@ export const TaskViewSwitcher = ({hideProjectFilter}:TaskViewSwitcherPorps) => {
     })
     const workspaceId= useWorkspaceId()
 
+    const paramProjectId = useProjectId()
+
     
     const {data:tasks, isLoading:isTaskLoading} = useGetTasks({
         workspaceId,
         status,
         assigneeId,
-        projectId,
+        projectId:paramProjectId || projectId,
         dueDate
     })
 

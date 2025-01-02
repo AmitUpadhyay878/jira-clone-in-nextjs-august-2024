@@ -36,9 +36,9 @@ export async function generateMetadata() {
     title: "Fixtron",
     description: "Fixtron || maintain Projects Structures",
     url: "/",
-    manifest: "https://nextjs.org/manifest.json",
+    // manifest: "https://nextjs.org/manifest.json",
     referrer: "origin-when-cross-origin",
-    keywords: ["Next.js", "React", "JavaScript"],
+    keywords: ["fixtron","task-manager", "project-manager", "project-structure", "project-structure-manager", "project-structure-management", "project-structure-management-tool", "project-structure-management-system"],
     authors: [
       { name: "Amit Upadhyay", url: "https://github.com/AmitUpadhyay878" },
     ],
@@ -47,7 +47,7 @@ export async function generateMetadata() {
     archives: ["https://nextjs.org/13"],
     assets: ["https://nextjs.org/assets"],
     bookmarks: ["https://nextjs.org/13"],
-    category: "technology",
+    category: ["technology", "software", "web development", "web design", "web", "development", "design", "software development", "software design"],
     formatDetection: {
       email: false,
       address: false,
@@ -73,33 +73,33 @@ export async function generateMetadata() {
       siteName: "Fixtron",
       images: [
         {
-          url: "https://nextjs.org/og.png", // Must be an absolute URL
+          url: "/og.png", // Must be an absolute URL
           width: 800,
           height: 600,
         },
-        {
-          url: "https://nextjs.org/og-alt.png", // Must be an absolute URL
-          width: 1800,
-          height: 1600,
-          alt: "My custom alt",
-        },
+        // {
+        //   url: "https://nextjs.org/og-alt.png", // Must be an absolute URL
+        //   width: 1800,
+        //   height: 1600,
+        //   alt: "My custom alt",
+        // },
       ],
-      videos: [
-        {
-          url: "https://nextjs.org/video.mp4", // Must be an absolute URL
-          width: 800,
-          height: 600,
-        },
-      ],
-      audio: [
-        {
-          url: "https://nextjs.org/audio.mp3", // Must be an absolute URL
-        },
-      ],
+      // videos: [
+      //   {
+      //     url: "https://nextjs.org/video.mp4", // Must be an absolute URL
+      //     width: 800,
+      //     height: 600,
+      //   },
+      // ],
+      // audio: [
+      //   {
+      //     url: "https://nextjs.org/audio.mp3", // Must be an absolute URL
+      //   },
+      // ],
       locale: "en_US",
       type: "website",
-      publishedTime: "2023-01-01T00:00:00.000Z",
-      authors: ["Amit Upadhyay", ""],
+      publishedTime: "2025-01-01T00:00:00.000Z",
+      authors: ["Amit Upadhyay"],
     },
     twitter: {
       // card: 'app',
@@ -110,21 +110,21 @@ export async function generateMetadata() {
       creator: "@amit",
       creatorId: "",
       images: {
-        url: "https://nextjs.org/og.png",
-        alt: "Next.js Logo",
+        url: "/og.png",
+        alt: "Flexitorn",
       },
-      app: {
-        name: "twitter_app",
-        id: {
-          iphone: "twitter_app://iphone",
-          ipad: "twitter_app://ipad",
-          googleplay: "twitter_app://googleplay",
-        },
-        url: {
-          iphone: "https://iphone_url",
-          ipad: "https://ipad_url",
-        },
-      },
+      // app: {
+      //   name: "twitter_app",
+      //   id: {
+      //     iphone: "twitter_app://iphone",
+      //     ipad: "twitter_app://ipad",
+      //     googleplay: "twitter_app://googleplay",
+      //   },
+      //   url: {
+      //     iphone: "https://iphone_url",
+      //     ipad: "https://ipad_url",
+      //   },
+      // },
     },
     robots: {
       index: false,
@@ -139,24 +139,24 @@ export async function generateMetadata() {
         "max-snippet": -1,
       },
     },
-    icons: {
-      icon: [
-        { url: "/icon.png" },
-        new URL("/icon.png", "https://example.com"),
-        { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
-      ],
-      shortcut: ["/shortcut-icon.png"],
-      apple: [
-        { url: "/apple-icon.png" },
-        { url: "/apple-icon-x3.png", sizes: "180x180", type: "image/png" },
-      ],
-      other: [
-        {
-          rel: "apple-touch-icon-precomposed",
-          url: "/apple-touch-icon-precomposed.png",
-        },
-      ],
-    },
+    // icons: {
+    //   icon: [
+    //     { url: "/icon.png" },
+    //     new URL("/icon.png", "https://example.com"),
+    //     { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
+    //   ],
+    //   shortcut: ["/shortcut-icon.png"],
+    //   apple: [
+    //     { url: "/apple-icon.png" },
+    //     { url: "/apple-icon-x3.png", sizes: "180x180", type: "image/png" },
+    //   ],
+    //   other: [
+    //     {
+    //       rel: "apple-touch-icon-precomposed",
+    //       url: "/apple-touch-icon-precomposed.png",
+    //     },
+    //   ],
+    // },
     verification: {
       google: "google",
       yandex: "yandex",
@@ -172,32 +172,32 @@ export async function generateMetadata() {
     appleWebApp: {
       title: "Fixtron",
       statusBarStyle: "black-translucent",
-      startupImage: [
-        "/assets/startup/apple-touch-startup-image-768x1004.png",
-        {
-          url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
-          media: "(device-width: 768px) and (device-height: 1024px)",
-        },
-      ],
+      // startupImage: [
+      //   "/assets/startup/apple-touch-startup-image-768x1004.png",
+      //   {
+      //     url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
+      //     media: "(device-width: 768px) and (device-height: 1024px)",
+      //   },
+      // ],
     },
-    appLinks: {
-      ios: {
-        url: "https://nextjs.org/ios",
-        app_store_id: "app_store_id",
-      },
-      android: {
-        package: "com.example.android/package",
-        app_name: "app_name_android",
-      },
-      web: {
-        url: "https://nextjs.org/web",
-        should_fallback: true,
-      },
-    },
-    facebook: {
-      appId: "12345678",
-      //  admins: ['12345678', '87654321'],
-    },
+    // appLinks: {
+    //   ios: {
+    //     url: "https://nextjs.org/ios",
+    //     app_store_id: "app_store_id",
+    //   },
+    //   android: {
+    //     package: "com.example.android/package",
+    //     app_name: "app_name_android",
+    //   },
+    //   web: {
+    //     url: "https://nextjs.org/web",
+    //     should_fallback: true,
+    //   },
+    // },
+    // facebook: {
+    //   appId: "12345678",
+    //   //  admins: ['12345678', '87654321'],
+    // },
     other: {
       custom: ["meta1", "meta2"],
     },
